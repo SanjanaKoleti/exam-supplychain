@@ -1,0 +1,308 @@
+@import url("leaflet/dist/leaflet.css");
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #2c3e50;
+  padding: 1.5rem;
+  color: white;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+main {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Login Styles */
+.login-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-type-selector {
+  display: flex;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.user-type-selector button {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.user-type-selector button.active {
+  background-color: #3498db;
+  color: white;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: #27ae60;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background-color: #fadbd8;
+  border-radius: 4px;
+}
+
+/* Dashboard Styles */
+.dashboard-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.user-info {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.qr-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.qr-code-display {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.instructions {
+  text-align: left;
+  margin: 1.5rem 0;
+}
+
+.instructions ol {
+  padding-left: 1.5rem;
+}
+
+.refresh-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.refresh-button:hover {
+  background-color: #2980b9;
+}
+
+/* Scanner Styles */
+.scanner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Passcode Display Styles */
+.passcode-container {
+  text-align: center;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.passcode-display {
+  margin: 2rem 0;
+}
+
+.passcode {
+  font-size: 3rem;
+  font-weight: bold;
+  letter-spacing: 0.5rem;
+  padding: 1rem;
+  background-color: #2c3e50;
+  color: white;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.expire-notice {
+  color: #e74c3c;
+  font-weight: 500;
+}
+
+.verification-info {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.back-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #7f8c8d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #6c7a7a;
+}
+/* Packet Tracking Styles */
+.tracking-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.tracking-input {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.tracking-input input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tracking-results {
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+  margin: 1rem 0;
+}
+
+.checkpoint {
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+.checkpoint-marker {
+  position: absolute;
+  left: -1.5rem;
+  top: 0;
+  width: 1rem;
+  height: 1rem;
+  background-color: #3498db;
+  border-radius: 50%;
+}
+
+.checkpoint-details {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 1rem;
+}
+
+.current-status {
+  background-color: #2ecc71;
+  color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+/* Packet Details Styles */
+.packet-details {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.packet-info {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}
+
+.packet-actions {
+  margin-top: 2rem;
+}
+
+.generate-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
