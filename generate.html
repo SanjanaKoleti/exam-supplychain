@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Generate Tracking</title>
+</head>
+<body>
+  <h2>Generate Packet QR</h2>
+  <button onclick="connectWallet()">🔐 Connect MetaMask</button>
+
+  <form id="packetForm">
+    <input type="text" id="packetId" placeholder="Packet ID" required><br>
+    <input type="text" id="printCenter" placeholder="Print Center" required><br>
+    <input type="text" id="batchNo" placeholder="Batch No" required><br>
+    <input type="text" id="destinationCenter" placeholder="Destination Center" required><br>
+    <input type="text" id="destinationLat" placeholder="Latitude" required><br>
+    <input type="text" id="destinationLong" placeholder="Longitude" required><br>
+    <button type="submit">Generate</button>
+  </form>
+
+  <p id="status"></p>
+
+  <!-- Include Web3 -->
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script>
+    let web3;
+    let contract;
+    let account;
+
+    const CONTRACT_ADDRESS = "0xf98495E77319bA161c6fDC4ec0F5D3154E77025f"; // Replace with deployed contract address
+    const ABI = [
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_packetId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_printCenter",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_batchNo",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_destinationCenter",
+				"type": "string"
+			},
+			{
+				"internalType": "int256",
+				"name": "_destinationLat",
+				"type": "int256"
+			},
+			{
+				"internalType": "int256",
+				"name": "_destinationLong",
+				"type": "int256"
+			}
+		],
+		"name": "createPacket",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "packetId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "printCenter",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "batchNo",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "destinationCenter",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "int256",
+				"name": "destinationLat",
+				"type": "int256"
+			},
+			{
+				"indexed": false,
+				"internalType": "int256",
+				"name": "destinationLong",
+				"type": "int256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "createdAt",
+				"type": "uint256"
+			}
+		],
+		"name": "PacketCreated",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "packets",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "packetId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "printCenter",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "batchNo",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "destinationCenter",
+				"type": "string"
+			},
+			{
+				"internalType": "int256",
+				"name": "destinationLat",
+				"type": "int256"
+			},
+			{
+				"internalType": "int256",
+				"name": "destinationLong",
+				"type": "int256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "createdAt",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "exists",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]; // Replace with your contract ABI JSON
+
+    async function connectWallet() {
+      if (window.ethereum) {
+        web3 = new Web3(window.ethereum);
+        try {
+          await window.ethereum.request({ method: 'eth_requestAccounts' });
+          const accounts = await web3.eth.getAccounts();
+          account = accounts[0];
+          document.getElementById("status").innerText = `🟢 Connected: ${account}`;
+          contract = new web3.eth.Contract(ABI, CONTRACT_ADDRESS);
+        } catch (err) {
+          document.getElementById("status").innerText = "❌ Connection rejected.";
+        }
+      } else {
+        alert("MetaMask not detected!");
+      }
+    }
+
+    document.getElementById("packetForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!contract || !account) {
+        alert("Connect MetaMask first!");
+        return;
+      }
+
+      const packetId = document.getElementById("packetId").value;
+      const printCenter = document.getElementById("printCenter").value;
+      const batchNo = document.getElementById("batchNo").value;
+      const destinationCenter = document.getElementById("destinationCenter").value;
+      const destinationLat = document.getElementById("destinationLat").value;
+      const destinationLong = document.getElementById("destinationLong").value;
+      const createdAt = Math.floor(Date.now() / 1000);
+
+      try {
+        await contract.methods.createPacket(
+          packetId, printCenter, batchNo,
+          destinationCenter, destinationLat, destinationLong, createdAt
+        ).send({ from: account });
+
+        document.getElementById("status").innerText = "✅ Packet created and stored on blockchain!";
+      } catch (err) {
+        console.error(err);
+        document.getElementById("status").innerText = "❌ Error while storing on blockchain.";
+      }
+        
+});
+
+    
+</script>
+</body>
+</html>
