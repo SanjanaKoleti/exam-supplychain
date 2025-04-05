@@ -1,0 +1,22 @@
+.options {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #1e88e5;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .qr-section, .track-section {
+    margin-top: 2rem;
+    background: #f0f8ff;
+    padding: 1rem;
+    border-radius: 10px;
+  }
+  
