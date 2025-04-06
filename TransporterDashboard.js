@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
-function ExamCenterDashboard() {
+function TransporterDashboard() {
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
   
@@ -15,7 +15,7 @@ function ExamCenterDashboard() {
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">Exam Center Dashboard</h1>
+          <h1 className="text-2xl font-bold">Transporter Dashboard</h1>
           <button
             onClick={handleLogout}
             className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
@@ -30,25 +30,25 @@ function ExamCenterDashboard() {
         </div>
         
         <div className="mb-6">
-          <h2 className="text-xl font-bold mb-4">Exam Center Functions</h2>
-          <p className="mb-4">As an exam center, you can manage examinations and candidate information.</p>
+          <h2 className="text-xl font-bold mb-4">Transporter Functions</h2>
+          <p className="mb-4">As a transporter, you can manage transportation logistics and delivery.</p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="border p-4 rounded">
-              <h3 className="font-bold mb-2">Schedule Exams</h3>
-              <p className="text-gray-700">Create and manage examination schedules</p>
+              <h3 className="font-bold mb-2">Manage Routes</h3>
+              <p className="text-gray-700">Create and manage transportation routes</p>
             </div>
             <div className="border p-4 rounded">
-              <h3 className="font-bold mb-2">Register Candidates</h3>
-              <p className="text-gray-700">Add and manage candidate information</p>
+              <h3 className="font-bold mb-2">Track Deliveries</h3>
+              <p className="text-gray-700">Monitor delivery status and locations</p>
             </div>
             <div className="border p-4 rounded">
-              <h3 className="font-bold mb-2">Record Results</h3>
-              <p className="text-gray-700">Enter and manage examination results</p>
+              <h3 className="font-bold mb-2">Schedule Pickups</h3>
+              <p className="text-gray-700">Schedule and manage pickup operations</p>
             </div>
             <div className="border p-4 rounded">
-              <h3 className="font-bold mb-2">Generate Reports</h3>
-              <p className="text-gray-700">Create reports on examination outcomes</p>
+              <h3 className="font-bold mb-2">View Reports</h3>
+              <p className="text-gray-700">Access transportation analytics and reports</p>
             </div>
           </div>
         </div>
@@ -57,4 +57,4 @@ function ExamCenterDashboard() {
   );
 }
 
-export default ExamCenterDashboard;
+export default TransporterDashboard;
